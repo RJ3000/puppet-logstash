@@ -17,7 +17,7 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
+# 
 #
 define logstash::service::systemd {
 
