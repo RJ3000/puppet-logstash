@@ -21,6 +21,9 @@
 #
 define logstash::service::systemd {
 
+
+  notify { "Using systemd": }
+
   #### Service management
 
   # set params: in operation
