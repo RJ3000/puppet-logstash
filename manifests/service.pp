@@ -34,6 +34,10 @@ class logstash::service {
       logstash::service::init { $logstash::params::service_name: }
     }
 
+    systemd: {
+      logstash::service::systemd { $logstash::params::service_name: }
+    }
+
     default: {
       fail("Unknown service provider ${logstash::service_provider}")
     }

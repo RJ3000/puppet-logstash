@@ -128,22 +128,101 @@ class logstash::params {
 
   # service parameters
   case $::operatingsystem {
-    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon', 'OracleLinux', 'SLES', 'OpenSuSE': {
+    'RedHat', 'CentOS', 'Scientific', 'Amazon', 'OracleLinux' : {
+
+      # Check Release number
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
+        $init_template       = 'logstash.systemd.erb'
+        $service_provider    = 'systemd'
+      } else {
+        $init_template       = 'logstash.Redhat.erb'
+        $service_provider    = 'init'
+      }
+
       $service_name       = 'logstash'
       $service_hasrestart = true
       $service_hasstatus  = true
       $service_pattern    = $service_name
-      $service_providers  = [ 'init' ]
+      $service_providers  = [ "${service_provider}" ]
       $defaults_location  = '/etc/sysconfig'
     }
-    'Debian', 'Ubuntu': {
+
+    'Fedora' : {
+
+      # Check Release number
+      if versioncmp($::operatingsystemmajrelease, '15') >= 0 {
+        $init_template       = 'logstash.systemd.erb'
+        $service_provider    = 'systemd'
+      } else {
+        $init_template       = 'logstash.Redhat.erb'
+        $service_provider    = 'init'
+      }
+
       $service_name       = 'logstash'
       $service_hasrestart = true
       $service_hasstatus  = true
       $service_pattern    = $service_name
-      $service_providers  = [ 'init' ]
+      $service_providers  = [ "${service_provider}" ]
+      $defaults_location  = '/etc/sysconfig'
+    }
+
+    'SLES', 'OpenSuSE': {
+
+      # Check Release number
+      if versioncmp($::operatingsystemmajrelease, '12') >= 0 {
+        $init_template       = 'logstash.systemd.erb'
+        $service_provider    = 'systemd'
+      } else {
+        $init_template       = 'logstash.Redhat.erb'
+        $service_provider    = 'init'
+      }
+
+      $service_name       = 'logstash'
+      $service_hasrestart = true
+      $service_hasstatus  = true
+      $service_pattern    = $service_name
+      $service_providers  = [ "${service_provider}" ]
+      $defaults_location  = '/etc/sysconfig'
+    }
+
+    'Debian': {
+
+      # Check Release number
+      if versioncmp($::operatingsystemmajrelease, '8') >= 0 {
+        $init_template       = 'logstash.systemd.erb'
+        $service_provider    = 'systemd'
+      } else {
+        $init_template       = 'logstash.Debian.erb'
+        $service_provider    = 'init'
+      }
+
+      $service_name       = 'logstash'
+      $service_hasrestart = true
+      $service_hasstatus  = true
+      $service_pattern    = $service_name
+      $service_providers  = [ "${service_provider}" ]
       $defaults_location  = '/etc/default'
     }
+
+    'Ubuntu': {
+
+      # Check Release number
+      if versioncmp($::operatingsystemmajrelease, '15') >= 0 {
+        $init_template       = 'logstash.systemd.erb'
+        $service_provider    = 'systemd'
+      } else {
+        $init_template       = 'logstash.Debian.erb'
+        $service_provider    = 'init'
+      }
+
+      $service_name       = 'logstash'
+      $service_hasrestart = true
+      $service_hasstatus  = true
+      $service_pattern    = $service_name
+      $service_providers  = [ "${service_provider}" ]
+      $defaults_location  = '/etc/default'
+    }
+
     'Darwin': {
       $service_name       = 'net.logstash'
       $service_hasrestart = true

@@ -1,0 +1,15 @@
+[Unit]
+Description=Starts and stops a single Logstash instance on this system
+Documentation=https://www.elastic.co/guide/en/logstash/master/index.html
+
+[Service]
+Type=forking
+EnvironmentFile=<%= @defaults_location %>/<%= @name %>
+User=<%= @user %>
+Group=<%= @group %>
+PIDFile=/var/run/<%= @name %>.pid
+ExecStart=$JAVACMD -Xmx$LS_HEAP_SIZE -Djava.io.tmpdir=$LS_HOME/tmp -jar $LS_HOME/logstash.jar agent --config $LS_CONF_DIR --log $LS_LOG_FILE -w 1
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
