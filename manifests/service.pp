@@ -30,11 +30,11 @@ class logstash::service {
 
   case $logstash::real_service_provider {
 
-    init: {
+    'init': {
       logstash::service::init { $logstash::params::service_name: }
     }
 
-    systemd: {
+    'systemd': {
       logstash::service::systemd { $logstash::params::service_name: }
     }
 
