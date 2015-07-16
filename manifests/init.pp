@@ -212,7 +212,6 @@ class logstash(
   # purge conf dir
   validate_bool($purge_configdir)
 
--------------
   if is_array($elasticsearch::params::service_providers) {
     # Verify the service provider given is in the array
     if ! ($service_provider in $elasticsearch::params::service_providers) {
@@ -224,16 +223,13 @@ class logstash(
     $real_service_provider = $elasticsearch::params::service_providers
   }
 
-------
-
-  if ! ($service_provider in $logstash::params::service_providers) {
-    fail("\"${service_provider}\" is not a valid provider for \"${::operatingsystem}\"")
-  }
-
-------
-
-
-
+# ------
+#
+#  if ! ($service_provider in $logstash::params::service_providers) {
+#    fail("\"${service_provider}\" is not a valid provider for \"${::operatingsystem}\"")
+#  }
+#
+# ------
 
 
   if ($package_url != undef and $version != false) {
