@@ -27,7 +27,7 @@
 #
 # * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
 # * Matthias Baur <mailto:matthias.baur@dmc.de>
-#
+
 class logstash::params {
 
   #### Default values for the parameters of the main module class, init.pp

@@ -139,8 +139,8 @@ define logstash::service::systemd {
     hasstatus  => $logstash::params::service_hasstatus,
     hasrestart => $logstash::params::service_hasrestart,
     pattern    => $logstash::params::service_pattern,
-    provider   => 'systemd'
-    require    => $service_require,
+    provider   => 'systemd',
+    require    => $service_require
   }
 
 }
