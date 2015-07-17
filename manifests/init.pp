@@ -223,15 +223,6 @@ class logstash(
     $real_service_provider = $logstash::params::service_providers
   }
 
-# ------
-#
-#  if ! ($service_provider in $logstash::params::service_providers) {
-#    fail("\"${service_provider}\" is not a valid provider for \"${::operatingsystem}\"")
-#  }
-#
-# ------
-
-
   if ($package_url != undef and $version != false) {
     fail('Unable to set the version number when using package_url option.')
   }
