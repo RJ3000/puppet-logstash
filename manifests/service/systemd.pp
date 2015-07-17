@@ -128,7 +128,7 @@ define logstash::service::systemd {
     refreshonly => true,
   }
 
-  file { "/lib/systemd/system/${name}.service":
+  file { "/lib/systemd/system/${name}":
     ensure => 'absent',
     before => Service[$name],
   }
