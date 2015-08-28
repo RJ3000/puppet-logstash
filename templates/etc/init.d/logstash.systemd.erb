@@ -5,7 +5,6 @@ Documentation=https://www.elastic.co/guide/en/logstash/master/index.html
 [Service]
 Type=forking
 EnvironmentFile=<%= @defaults_location %>/<%= @name %>
-Environment="JAVACMD=/sbin/java"
 User=<%= @logstash_user %>
 Group=<%= @logstash_group %>
 PIDFile=/var/run/<%= @name %>.pid
