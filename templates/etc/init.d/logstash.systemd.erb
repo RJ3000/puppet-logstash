@@ -3,7 +3,7 @@ Description=Starts and stops a single Logstash instance on this system
 Documentation=https://www.elastic.co/guide/en/logstash/master/index.html
 
 [Service]
-Type=forking
+Type=simple
 EnvironmentFile=<%= @defaults_location %>/<%= @name %>
 User=<%= @logstash_user %>
 Group=<%= @logstash_group %>
