@@ -45,6 +45,7 @@ define logstash::configfile(
   $source = undef,
   $order = 10,
   $template = undef,
+  $concat = true,
 ) {
 
   if ($template != undef ) {
@@ -53,13 +54,22 @@ define logstash::configfile(
   elsif ($content != undef) {
     $config_content = $content
   }
+  
+  if $concat {
 
-  file_fragment { $name:
-    tag     => "LS_CONFIG_${::fqdn}",
-    content => $config_content,
-    source  => $source,
-    order   => $order,
-    before  => [ File_concat['ls-config'] ]
+    file_fragment { $name:
+      tag     => "LS_CONFIG_${::fqdn}",
+      content => $config_content,
+      source  => $source,
+      order   => $order,
+      before  => [ File_concat['ls-config'] ]
+    }
+
+  } else {
+
+    file { "${logstash::configdir}/conf.d/${name}.conf":
+      content => $config_content,
+      source  => $source,
+    }
   }
-
 }
