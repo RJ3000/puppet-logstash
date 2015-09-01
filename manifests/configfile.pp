@@ -48,6 +48,8 @@ define logstash::configfile(
   $concat = undef,
 ) {
 
+  notify{"concat value: ${concat}": }
+  
   if ($template != undef ) {
     $config_content = template($template)
   }
@@ -57,6 +59,8 @@ define logstash::configfile(
   
   if $concat {
 
+    notify{"entered file_frag}
+  
     file_fragment { $name:
       tag     => "LS_CONFIG_${::fqdn}",
       content => $config_content,
@@ -66,6 +70,8 @@ define logstash::configfile(
     }
 
   } else {
+  
+    notify{"entered seperate files}
 
     file { "${logstash::configdir}/conf.d/${name}.conf":
       content => $config_content,
