@@ -45,7 +45,7 @@ define logstash::configfile(
   $source = undef,
   $order = 10,
   $template = undef,
-  $concat = true,
+  $concat = undef,
 ) {
 
   if ($template != undef ) {
