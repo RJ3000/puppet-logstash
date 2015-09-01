@@ -59,7 +59,7 @@ define logstash::configfile(
   
   if $concat {
 
-    notify{"entered file_frag"}
+    notify{"entered file_frag": }
   
     file_fragment { $name:
       tag     => "LS_CONFIG_${::fqdn}",
@@ -71,7 +71,7 @@ define logstash::configfile(
 
   } else {
   
-    notify{"entered seperate files"}
+    notify{"entered seperate files": }
 
     file { "${logstash::configdir}/conf.d/${name}.conf":
       content => $config_content,
