@@ -41,11 +41,11 @@
 # * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
 #
 define logstash::configfile(
-  $content = undef,
-  $source = undef,
-  $order = 10,
+  $content  = undef,
+  $source   = undef,
+  $order    = 10,
   $template = undef,
-  $concat = undef,
+  $concat   = $::logstash::concat,
 ) {
 
   notify{"concat value: ${concat}": }
