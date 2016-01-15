@@ -8,7 +8,7 @@ EnvironmentFile=<%= @defaults_location %>/<%= @name %>
 User=<%= @logstash_user %>
 Group=<%= @logstash_group %>
 PIDFile=/var/run/<%= @name %>.pid
-ExecStart=<%= @installpath %>/bin/logstash agent --config $LS_CONF_DIR --log $LS_LOG_FILE -w $LS_WORKER_THREADS --verbose
+ExecStart=<%= @installpath %>/bin/logstash agent --config $LS_CONF_DIR --log $LS_LOG_FILE -w $LS_WORKER_THREADS 
 TimeoutStopSec=20
 
 [Install]
